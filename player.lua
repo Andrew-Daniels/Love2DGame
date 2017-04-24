@@ -18,29 +18,15 @@ end
 
 function love.keypressed(key)
 		if key == "f" then
-			shooting = true
-		end
+			projectile.x = player.x + 20
+			projectile.y = player.y + 7
+		end	
 end
 
 function Player:update(dt)
-	if shooting == true then
-		if playerCount <= 0 then
-			playerCount = playerCount + 0.01
-			projectile.x = lerp(player.x + 50, player.x + 100, playerCount)
-			projectile.y = player.y + 7
-			projectile.width = 5
-			projectile.height = 5
-		elseif playerCount >= 1 then
-			playerCount = playerCount - 0.01
-			projectile.x = lerp(player.x + 50, player.x + 100, playerCount)
-			projectile.y = player.y + 7
-			projectile.width = 5
-			projectile.height = 5
-		end
-			
-
 		
-	end
+		
+
 
 	if love.keyboard.isDown('a') then
 		self.x = self.x - (self.speed * dt)
