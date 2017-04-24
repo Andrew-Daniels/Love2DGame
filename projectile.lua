@@ -1,10 +1,9 @@
-Projectile = Object:extend()
+local GameObject = require("GameObject");
 
-function Projectile:new()
-	self.x = 0
-	self.y = 0
-	self.width = 0
-	self.height = 0
+Projectile = GameObject:extend();
+
+function Projectile:new(x, y, width, height)
+	Projectile.super.new(self, x, y, width, height);
 end
 
 function Projectile:update(dt)
@@ -12,5 +11,5 @@ function Projectile:update(dt)
 end
 
 function Projectile:draw()
-	love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
+	love.graphics.rectangle("line", self.position.x, self.positiony, self.width, self.height)
 end

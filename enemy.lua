@@ -1,53 +1,24 @@
-Enemy = Object:extend()
+local GameObject = require("GameObject");
 
-function Enemy:new(yaxis, width, height, startXAxis, endXAxis, speed)
-	self.x = 5
-	self.y = yaxis
-	self.width = width
-	self.height = height
-	enemyCount = 0
-	goDown = true
-	goUp = false
-	xAxisStart = startXAxis
-	xAxisEnd = endXAxis
-	enemySpeed = speed
-	
+Enemy = GameObject:extend();
+
+function Enemy:new(xaxis, yaxis, width, height, endPosition, speed)
+	Enemy.super.new(self, xaxis, yaxis, width, height);
+	self.counter = 0; -- Used for lerping position.
+	self.endPosition = endPosition;
+	self.speed = speed;
 end
-
-function CheckCollision(x1,y1,w1,h1,x2,y2,w2,h2)
-	return x1 < x2+w2 and
-	x2 < x1+w1 and
-	y1 < y2+h2 and
-	y2 < y1+h1
-end
-
-
-function lerp(a, b, t)
-	return a + (b - a) * t
-end
-		
 
 function Enemy:update(dt)
-
-	if goDown == true then
-		enemyCount = enemyCount - enemySpeed;
-		if enemyCount <= 0 then
-			goUp = true;
-			goDown = false;
-		end 
-	elseif goUp == true then 
-		enemyCount = enemyCount + enemySpeed;
-		if enemyCount >= 1 then
-			goUp = false;
-			goDown = true; 
-		end		
+	-- print(self.position.x, self.position.y);
+	if (self.counter >= 1) then
+		self.counter = 0;
+	else
+		self.counter = self.counter + self.speed;
 	end
-	
-
-	self.x = lerp(xAxisStart, xAxisEnd, enemyCount);
-	
+	self.position = self.position:lerp(self.endPosition, self.counter);
 end
 
 function Enemy:draw()
-	love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+	love.graphics.rectangle("fill", self.position.x, self.position.y, self.width, self.height)
 end
