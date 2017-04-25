@@ -11,7 +11,7 @@ function Enemy:new(yaxis, width, height, startXAxis, endXAxis, speed)
 	xAxisEnd = endXAxis
 	enemySpeed = speed
 	enemyCount = 0
-	
+	world:add(self, self.x, self.y, self.width, self.height);	-- Refactor me.
 end
 
 function CheckCollision(x1,y1,w1,h1,x2,y2,w2,h2)
@@ -46,7 +46,7 @@ function Enemy:update(dt)
 	end
 	
 
-	self.x = lerp(xAxisStart, xAxisEnd, enemyCount);
+	self.x, self.y = world:move(self, lerp(xAxisStart, xAxisEnd, enemyCount), self.y);
 	
 end
 
