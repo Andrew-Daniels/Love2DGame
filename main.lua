@@ -8,7 +8,7 @@ function love.load()
 	require "projectile"
 	
 	enemy = Enemy(25, 5, 5, 30, 100, 0.04)
-	enemyTwo = Enemy(50, 5, 5, 50, 200, 0.01)
+	enemyTwo = Enemy(50, 5, 5, 50, 70, 0.01)
 	player = Player(5, 5, 100, 20, 20)
 	projectile = Projectile()
 	

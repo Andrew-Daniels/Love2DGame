@@ -5,12 +5,12 @@ function Enemy:new(yaxis, width, height, startXAxis, endXAxis, speed)
 	self.y = yaxis
 	self.width = width
 	self.height = height
-	enemyCount = 0
 	goDown = true
 	goUp = false
 	xAxisStart = startXAxis
 	xAxisEnd = endXAxis
 	enemySpeed = speed
+	enemyCount = 0
 	
 end
 
@@ -28,6 +28,8 @@ end
 		
 
 function Enemy:update(dt)
+
+
 
 	if goDown == true then
 		enemyCount = enemyCount - enemySpeed;
